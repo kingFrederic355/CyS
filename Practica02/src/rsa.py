@@ -75,4 +75,5 @@ while(option != '0'):
         print(decrypt(msg,d,n))
     else:
         print("Ingrese una opcion valida")
-'''
+       '''
+
