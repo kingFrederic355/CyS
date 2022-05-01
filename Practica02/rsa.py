@@ -8,12 +8,7 @@ def generaClaves():
     # Primero obtendremos 2 valores p y q de tamaño 100
     p = ms.getPrime()
     q = ms.getPrime()
-    '''# Debug
-    print("valor p:\n"+str(p)+
-        "\nvalor q:\n"+str(q))'''
-    n = p*q
-    time.sleep(3)
-    print('Valor de n:\n'+str(n))
+    n = p*q    
     # Segunda parte , obtener e
 
     # Usando p y q generaremos phi
@@ -21,15 +16,11 @@ def generaClaves():
 
     # Calcularemos e tal que, mcd(e,phi) = 1, es decir, e sea coprimo de phi
     e = ms.getCoPrime(phi)
-    time.sleep(3)
-    print('Valor de e:\n'+str(e))
 
     # Tercera parte, obtener el inverso de e, mejor conocido como d
     d = ms.modInverse(e,phi)
-    time.sleep(3)
-    print('Valor de d:\n'+str(d))
-    print(str(e*d % phi))
-
+    
+    return [n,e,d]
 
 # Funcion de encriptado de RSA la cual toma un mensaje m y la transforma usando la operacion c ≅ m^e mod n
 def encrypt(m,e,n):
@@ -58,15 +49,20 @@ def decrypt(m,d,n):
         mensaje += chr(num)
     return mensaje
 
-
-
+#Para una version de rsa usando linea de comandos descomentar la parte inferior
+'''
 option = ''
 while(option != '0'):
     option = input("1. Genera claves\n2. Encripta mensaje\n3. Desencripta mensaje\n0. Salir\n>> ")
     if option == '0':
         print("Gracias por usar el programa")
     elif option == '1':
-        generaClaves()
+        keys = generaClaves()
+        
+        print('Valor de n:\n'+str(keys[0]))
+        print('Valor de e:\n'+str(keys[1]))
+        print('Valor de d:\n'+str(keys[2]))
+        
     elif option == '2':
         msg = input("Ingresa tu mensaje:\n")
         n = int(input("Ingresa tu valor n:\n"))
@@ -79,3 +75,4 @@ while(option != '0'):
         print(decrypt(msg,d,n))
     else:
         print("Ingrese una opcion valida")
+'''
